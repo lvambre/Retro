@@ -1,0 +1,13 @@
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\controllers\ItemController.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\Image.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\Item.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\itemsFilters\Brand.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\itemsFilters\Category.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\itemsFilters\Color.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\itemsFilters\Condition.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\models\itemsFilters\Size.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\repositories\ImageRepository.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\repositories\ItemRepository.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\RetroApplication.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\services\ImageService.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\services\ItemService.java

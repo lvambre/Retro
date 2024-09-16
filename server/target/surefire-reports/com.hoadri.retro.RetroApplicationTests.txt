@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.hoadri.retro.RetroApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.87 s -- in com.hoadri.retro.RetroApplicationTests

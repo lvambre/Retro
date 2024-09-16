@@ -1,0 +1,306 @@
+openapi: 3.0.3
+info:
+  title: Server API Retro
+  description: This is the Retro's front/back API.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+    
+paths:
+  /item/items:
+    get:
+      summary: Retrieves all items on Retro
+      responses:
+        '200':
+          description: Provides a list with all items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+
+  /item/itemsForSale:
+    get:
+      summary: Retrieves all items for sale on Retro
+      responses:
+        '200':
+          description: Provides a list with all items for sale
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+
+  /item/sortBy/{categoryString}:
+    get:
+      summary: Retrieves all items corresponding to a given category
+      parameters:
+        - name: categoryString
+          in: path
+          description: String of the category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Provides a list with all the items from the given category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+
+  /item/get/{id}:
+    get:
+      summary: Retrieves one specific item with its id
+      parameters:
+        - name: id
+          in: path
+          description: Item's id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Provides the item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found in the database
+
+  /item/newItem:
+    post:
+      summary: Adds a new item for sale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Item added for sale
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+
+  /item/soldItem/{id}:
+    patch:
+      summary: Changes item from available to not available (item sold)
+      parameters:
+        - name: id
+          in: path
+          description: Item's id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Item successfully updated
+        '404':
+          description: Item not found in the database
+
+  /item/updateItem:
+    patch:
+      summary: Updates an item for sale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Item successfully updated
+        '404':
+          description: Item not found in the database
+
+  /item/deleteItem/{id}:
+    delete:
+      summary: Deletes one specific item with its id
+      parameters:
+        - name: id
+          in: path
+          description: Item's id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Item successfully deleted
+        '404':
+          description: Item not found in the database
+  
+  /item/uploadImages/{id}:
+    post:
+      summary: Uploads images to a specific item
+      parameters:
+        - name: id
+          in: path
+          description: Item's id
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: files
+          in: query
+          description: Files to upload
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Images successfully uploaded
+
+components:
+  schemas:
+    Item:
+      type: object
+      properties: 
+        id:
+          type: string
+          format: uuid
+          description: Item's id
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
+        name:
+          type: string
+          description: Item's name
+          example: Brown fur jacket
+        description:
+          type: string
+          description: Item's description
+          example: The jacket was worn only once, it is in perfect condition
+        sellerUsername:
+          type: string
+          description: Item's seller
+          example: lvhoa
+        price:
+          type: number
+          description: Item's price
+          example: 35.15
+        available:
+          type: boolean
+          description: Item's availability (sold or not)
+          example: true
+        women:
+          type: boolean
+          description: Item sold for women or not
+          example: true
+        men:
+          type: boolean
+          description: Item sold for men or not
+          example: true
+        brand:
+          $ref: '#/components/schemas/BrandEnum'
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        colors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColorEnum'
+        condition:
+          $ref: '#/components/schemas/ConditionEnum'
+        size:
+          $ref: '#/components/schemas/SizeEnum'
+        images:
+          type: array
+          items:
+            type: string
+
+    BrandEnum:
+      type: string
+      enum:
+        - ADIDAS
+        - NIKE
+        - DR_MARTENS
+        - MURE_GRAND
+        - WEEKDAY
+        - COS
+        - VON_DUTCH
+        - LEVIS
+
+    CategoryEnum:
+      type: string
+      enum:
+        - DRESSES
+        - JUMPERS_SWEATERS
+        - TOPS_TSHIRTS
+        - TROUSERS
+        - LEGGINGS
+        - JUMPSUITS
+        - NIGHTWEAR
+        - LINGERIE
+        - ACTIVEWEAR
+        - OUTWEAR
+        - SUITS_BLAZERS
+        - SKIRTS
+        - JEANS
+        - SHORTS
+        - SWIMWEAR
+        - MATERNITY
+        - COSTUMES
+
+    ColorEnum:
+      type: string
+      enum:
+        - BLACK
+        - WHITE
+        - BLUE
+        - GREY
+        - BEIGE
+        - MULTI
+        - NAVY
+        - BROWN
+        - CREAM
+        - LIGHT_BLUE
+        - RED
+        - ROSE
+        - GREEN
+        - PINK
+        - KHAKI
+        - BURGUNDY
+        - DARK_GREEN
+        - PURPLE
+        - ORANGE
+        - TURQUOISE
+        - YELLOW
+        - LILAC
+        - CORAL
+        - MUSTARD
+        - MINT
+        - GOLD
+        - SILVER
+        - APRICOT
+
+    ConditionEnum:
+      type: string
+      enum:
+        - NEW_WITH_TAGS
+        - NEW_WITHOUT_TAGS
+        - VERY_GOOD
+        - GOOD
+        - SATISFACTORY
+
+    SizeEnum:
+      type: string
+      enum:
+        - XXXS
+        - XXS
+        - XS
+        - S
+        - M
+        - L
+        - XL
+        - XXL
+        - XXXL

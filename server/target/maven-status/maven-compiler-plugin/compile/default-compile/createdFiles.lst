@@ -1,0 +1,13 @@
+com\hoadri\retro\controllers\ItemController.class
+com\hoadri\retro\models\Image.class
+com\hoadri\retro\models\itemsFilters\Category.class
+com\hoadri\retro\models\itemsFilters\Color.class
+com\hoadri\retro\services\ImageService.class
+com\hoadri\retro\repositories\ItemRepository.class
+com\hoadri\retro\RetroApplication.class
+com\hoadri\retro\models\Item.class
+com\hoadri\retro\models\itemsFilters\Size.class
+com\hoadri\retro\services\ItemService.class
+com\hoadri\retro\models\itemsFilters\Condition.class
+com\hoadri\retro\models\itemsFilters\Brand.class
+com\hoadri\retro\repositories\ImageRepository.class
