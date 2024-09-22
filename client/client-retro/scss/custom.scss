@@ -1,0 +1,10 @@
+// Custom Bootstrap variables
+$body-bg: #FFF7E7; // Custom body background color
+$body-color: #333; // Custom body text color
+$primary: #8CB18F; // Change primary button color
+$secondary: #9363A3; // Change secondary button color
+
+// Import Bootstrap after overriding the variables
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+

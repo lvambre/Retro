@@ -1,11 +1,14 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import ListGroup from "./components/ListGroup.tsx";
+import './App.css'
+import NavBar from "./components/NavBar.tsx";
 
 function App() {
 
-    return <div><ListGroup /></div>
+    return (
+        <div><NavBar /></div>
+    )
 
   // const [count, setCount] = useState(0)
   //
