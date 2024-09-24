@@ -1,9 +1,11 @@
 package com.hoadri.retro.services;
 
 import com.hoadri.retro.models.Item;
+import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.models.enums.*;
 import com.hoadri.retro.repositories.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,10 @@ import java.util.UUID;
  * Acts as a bridge between the controller and the repository to ensure validations and rules before saving data
  */
 @Service
+@RequiredArgsConstructor
 public class ItemService {
     @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     /**
      * Retrieves all items on Retro
@@ -82,7 +85,7 @@ public class ItemService {
      * @param id Item's attribute
      * @param name Item's attribute
      * @param description Item's attribute
-     * @param sellerUsername Item's attribute
+     * @param seller Item's attribute
      * @param price Item's attribute
      * @param imagePaths Item's attribute
      * @return True if update was successful
@@ -91,7 +94,7 @@ public class ItemService {
             UUID id,
             String name,
             String description,
-            String sellerUsername,
+            RetroUser seller,
             double price,
             boolean available,
             boolean women,
@@ -105,7 +108,7 @@ public class ItemService {
         Item item = itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Item not found"));
         item.setName(name);
         item.setDescription(description);
-        item.setSellerUsername(sellerUsername);
+        item.setSeller(seller);
         item.setPrice(price);
         item.setAvailable(available);
         item.setWomen(women);

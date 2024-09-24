@@ -25,8 +25,8 @@ public class Item {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "seller_username", nullable = false)
-    private String sellerUsername;
+    @ManyToOne
+    private RetroUser seller;
 
     @Column(name = "price", nullable = false)
     private double price;
@@ -74,7 +74,7 @@ public class Item {
     public Item(UUID id,
                 String name,
                 String description,
-                String sellerUsername,
+                RetroUser seller,
                 double price,
                 boolean available,
                 boolean women,
@@ -89,7 +89,7 @@ public class Item {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.sellerUsername = sellerUsername;
+        this.seller = seller;
         this.price = price;
         this.available = available;
         this.women = women;

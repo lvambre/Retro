@@ -3,6 +3,7 @@ package com.hoadri.retro.controllers;
 import com.hoadri.retro.models.Item;
 import com.hoadri.retro.models.enums.Category;
 import com.hoadri.retro.services.ItemService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,10 +25,11 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/item")
+@RequiredArgsConstructor
 public class ItemController {
 
     @Autowired
-    private ItemService itemService;
+    private final ItemService itemService;
 
     /**
      * Retrieves all items on Retro
@@ -135,7 +137,7 @@ public class ItemController {
                     updatedItem.getId(),
                     updatedItem.getName(),
                     updatedItem.getDescription(),
-                    updatedItem.getSellerUsername(),
+                    updatedItem.getSeller(),
                     updatedItem.getPrice(),
                     updatedItem.isAvailable(),
                     updatedItem.isWomen(),
