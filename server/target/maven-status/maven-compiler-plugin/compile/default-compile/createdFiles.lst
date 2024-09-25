@@ -15,6 +15,7 @@ com\hoadri\retro\models\Item.class
 com\hoadri\retro\models\RetroUser.class
 com\hoadri\retro\models\enums\Brand.class
 com\hoadri\retro\models\Order.class
+com\hoadri\retro\dtos\ItemDTO.class
 com\hoadri\retro\models\enums\Color.class
 com\hoadri\retro\dtos\UserLogInDTO.class
 com\hoadri\retro\models\enums\OrderStatus.class

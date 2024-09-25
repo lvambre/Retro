@@ -14,7 +14,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.security.Principal;
 import java.util.List;
 
 /**

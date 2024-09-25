@@ -1,7 +1,6 @@
 package com.hoadri.retro.controllers;
 
 import com.hoadri.retro.dtos.ItemDTO;
-import com.hoadri.retro.models.Item;
 import com.hoadri.retro.models.enums.Category;
 import com.hoadri.retro.services.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -132,27 +131,27 @@ public class ItemController {
     /**
      * Updates an item for sale
      *
-     * @param updatedItem The updated Item
+     * @param updatedItemDTO The updated ItemDTO
      * @return ResponseEntity with a success message or an error message as a String
      */
     @PatchMapping(value = "updateItem", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@RequestBody Item updatedItem) {
+    public ResponseEntity<String> updateItem(@RequestBody ItemDTO updatedItemDTO) {
         try {
             return itemService.updateItem(
-                    updatedItem.getId(),
-                    updatedItem.getName(),
-                    updatedItem.getDescription(),
-                    updatedItem.getSeller(),
-                    updatedItem.getPrice(),
-                    updatedItem.isAvailable(),
-                    updatedItem.isWomen(),
-                    updatedItem.isMen(),
-                    updatedItem.getBrand(),
-                    updatedItem.getCategory(),
-                    updatedItem.getCondition(),
-                    updatedItem.getColors(),
-                    updatedItem.getSize(),
-                    updatedItem.getImagePaths())
+                    updatedItemDTO.id(),
+                    updatedItemDTO.name(),
+                    updatedItemDTO.description(),
+                    updatedItemDTO.sellerUsername(),
+                    updatedItemDTO.price(),
+                    updatedItemDTO.available(),
+                    updatedItemDTO.women(),
+                    updatedItemDTO.men(),
+                    updatedItemDTO.brand(),
+                    updatedItemDTO.category(),
+                    updatedItemDTO.colors(),
+                    updatedItemDTO.condition(),
+                    updatedItemDTO.size(),
+                    updatedItemDTO.imagePaths())
                     ? new ResponseEntity<>("Item updated successfully", HttpStatus.OK)
                     : new ResponseEntity<>("Item not found", HttpStatus.NOT_FOUND);
         } catch (final Exception ex) {

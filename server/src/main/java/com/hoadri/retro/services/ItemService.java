@@ -172,15 +172,15 @@ public class ItemService {
      * @param id Item's attribute
      * @param name Item's attribute
      * @param description Item's attribute
-     * @param seller Item's attribute
+     * @param sellerUsername Item's attribute
      * @param price Item's attribute
      * @param available Item's attribute
      * @param women Item's attribute
      * @param men Item's attribute
      * @param brand Item's attribute
      * @param category Item's attribute
-     * @param condition Item's attribute
      * @param colors Item's attribute
+     * @param condition Item's attribute
      * @param size Item's attribute
      * @param imagePaths Item's attribute
      * @return True if update was successful
@@ -189,29 +189,30 @@ public class ItemService {
             UUID id,
             String name,
             String description,
-            RetroUser seller,
+            String sellerUsername,
             double price,
             boolean available,
             boolean women,
             boolean men,
             Brand brand,
             Category category,
-            Condition condition,
             List<Color> colors,
+            Condition condition,
             Size size,
             List<String> imagePaths) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Item not found"));
         item.setName(name);
         item.setDescription(description);
-        item.setSeller(seller);
+        RetroUser retroUser = retroUserRepository.findByUsername(sellerUsername);
+        item.setSeller(retroUser);
         item.setPrice(price);
         item.setAvailable(available);
         item.setWomen(women);
         item.setMen(men);
         item.setBrand(brand);
         item.setCategory(category);
-        item.setCondition(condition);
         item.setColors(colors);
+        item.setCondition(condition);
         item.setSize(size);
         item.setImagePaths(imagePaths);
         itemRepository.save(item);

@@ -9,7 +9,7 @@ public record ItemDTO(
         UUID id,
         String name,
         String description,
-        String username,
+        String sellerUsername,
         double price,
         boolean available,
         boolean women,
