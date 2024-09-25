@@ -1,9 +1,6 @@
 package com.hoadri.retro.dtos;
 
-import com.hoadri.retro.models.Item;
 import jakarta.validation.constraints.NotEmpty;
-
-import java.util.List;
 
 public record UserCredentialsDTO(
         @NotEmpty String username,
@@ -12,7 +9,5 @@ public record UserCredentialsDTO(
         @NotEmpty String phoneNumber,
         @NotEmpty String address,
         String profilePicturePath,
-        String description,
-        List<Item> itemsOrdered,
-        List<Item> itemsSold) {
+        String description) {
 }

@@ -7,6 +7,113 @@ servers:
   - url: 'http://localhost:8080'
     
 paths:
+  /user/signUp:
+    post:
+      summary: Creates a new Retro account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentialsDTO'
+      responses:
+        '200':
+          description: Account successfully created
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: User already exists
+
+  /user/signIn:
+    post:
+      summary: Logs in Retro application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogInDTO'
+      responses:
+        '200':
+          description: Account successfully logged-in
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: User already logged-in
+        '401':
+          description: Wrong username or password
+
+  /user/signOut:
+    post:
+      summary: Logs out Retro application
+      responses:
+        '200':
+          description: Account successfully logged-out
+          content:
+            application/json:
+              schema:
+                type: string
+
+  /user/delete/{username}:
+    delete:
+      summary: Deletes a Retro account
+      parameters:
+        - name: username
+          in: path
+          description: Account's username to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account successfully deleted
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Account to delete not found
+
+  /user/changePassword:
+    post:
+      summary: Changes logged-in user's password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequest'
+      responses:
+        '200':
+          description: Password successfully changed
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Wrong old password, password change failed
+          content:
+            application/json:
+              schema:
+                type: string
+  
+  /user/users:
+    get:
+      summary: Retrieves all Retro's users
+      responses: 
+        '200':
+          description: Provides a list with all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPublicDTO'
+
   /item/items:
     get:
       summary: Retrieves all items on Retro
@@ -18,7 +125,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Item'
+                  $ref: '#/components/schemas/ItemDTO'
 
   /item/itemsForSale:
     get:
@@ -31,7 +138,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Item'
+                  $ref: '#/components/schemas/ItemDTO'
 
   /item/sortBy/{categoryString}:
     get:
@@ -51,7 +158,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Item'
+                  $ref: '#/components/schemas/ItemDTO'
 
   /item/get/{id}:
     get:
@@ -70,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Item'
+                $ref: '#/components/schemas/ItemDTO'
         '404':
           description: Item not found in the database
 
@@ -82,14 +189,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Item'
+              $ref: '#/components/schemas/ItemDTO'
       responses:
         '200':
           description: Item added for sale
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Item'
+                type: string
+        '404':
+          description: Error while creating the new item
+          content:
+            application/json:
+              schema:
+                type: string
 
   /item/soldItem/{id}:
     patch:
@@ -105,8 +218,16 @@ paths:
       responses:
         '200':
           description: Item successfully updated
+          content:
+            application/json:
+              schema:
+                type: string
         '404':
           description: Item not found in the database
+          content:
+            application/json:
+              schema:
+                type: string
 
   /item/updateItem:
     patch:
@@ -116,12 +237,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Item'
+              $ref: '#/components/schemas/ItemDTO'
       responses:
         '200':
           description: Item successfully updated
+          content:
+            application/json:
+              schema:
+                type: string
         '404':
           description: Item not found in the database
+          content:
+            application/json:
+              schema:
+                type: string
 
   /item/deleteItem/{id}:
     delete:
@@ -137,8 +266,16 @@ paths:
       responses:
         '200':
           description: Item successfully deleted
+          content:
+            application/json:
+              schema:
+                type: string
         '404':
           description: Item not found in the database
+          content:
+            application/json:
+              schema:
+                type: string
   
   /item/uploadImages/{id}:
     post:
@@ -162,10 +299,100 @@ paths:
       responses:
         '200':
           description: Images successfully uploaded
+          content:
+            application/json:
+              schema:
+                type: string
 
 components:
   schemas:
-    Item:
+    UserCredentialsDTO:
+      type: object
+      properties: 
+        username:
+          type: string
+          description: User's name
+          example: lvhoa
+        password:
+          type: string
+          description: User's password
+          example: badPassword&
+        email:
+          type: string
+          description: User's email
+          example: lvhoa@gmail.com
+        phoneNumber:
+          type: string
+          description: User's phone number
+          example: +33643220143
+        address:
+          type: string
+          description: User's address
+          example: 20 avenue des buttes de coësmes, 35700 Rennes
+        profilePicturePath:
+          type: string
+          description: User's profile picture path
+          example: C:/retro/images/image_56.jpeg
+        description:
+          type: string
+          description: User's description
+          example: I love to sell the clothes that I don't use anymore.
+      required:
+        - username
+        - password
+        - email
+        - phoneNumber
+        - address
+
+    UserLogInDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: User's name
+          example: lvhoa
+        password:
+          type: string
+          description: User's password
+          example: badPassword&
+      required:
+        - username
+        - password
+
+    UserPublicDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: User's name
+          example: lvhoa
+        profilePicturePath:
+          type: string
+          description: User's profile picture path
+          example: C:/retro/images/image_56.jpeg
+        description:
+          type: string
+          description: User's description
+          example: I love to sell the clothes that I don't use anymore.
+      required:
+        - username
+
+    PasswordChangeRequest:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          description: User's old password
+          example: badPassword&
+        newPassword:
+          type: string
+          description: User's new password
+          example: goodPassword&&
+      required:
+        - oldPassword
+        - newPassword
+          
+    ItemDTO:
       type: object
       properties: 
         id:
@@ -213,7 +440,7 @@ components:
           $ref: '#/components/schemas/ConditionEnum'
         size:
           $ref: '#/components/schemas/SizeEnum'
-        images:
+        imagePaths:
           type: array
           items:
             type: string

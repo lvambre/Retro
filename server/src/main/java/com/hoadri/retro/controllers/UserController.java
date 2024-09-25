@@ -30,9 +30,10 @@ public class UserController {
     /**
      * Signs up a new Retro user
      * @param user The new user
+     * @return ResponseEntity with a success message or an error message as a String
      */
     @PostMapping(value = "signUp", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void signUp(@RequestBody final UserCredentialsDTO user) {
+    public ResponseEntity<String> signUp(@RequestBody final UserCredentialsDTO user) {
         if(!userService.signUp(
                 user.username(),
                 user.password(),
@@ -43,17 +44,20 @@ public class UserController {
                 user.description())
         )
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
+        return new ResponseEntity<>("Account successfully created", HttpStatus.OK);
     }
 
     /**
      * Signs in a Retro user
      * @param user The user to sign in
+     * @return ResponseEntity with a success message or an error message as a String
      */
     @PostMapping(value = "signIn", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void signIn(@RequestBody final UserLogInDTO user) {
+    public ResponseEntity<String> signIn(@RequestBody final UserLogInDTO user) {
         try {
             if (!userService.signIn(user.username(), user.password()))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Already signed in");
+            return new ResponseEntity<>("Successfully logged-in", HttpStatus.OK);
         }
         catch (final ServletException ex) {
             if (ex.getCause() instanceof BadCredentialsException)
@@ -64,11 +68,14 @@ public class UserController {
 
     /**
      * Signs out the logged-in user
+     * @return ResponseEntity with a success message or an error message as a String
      */
     @PostMapping(value = "signOut")
-    public void signOut() {
+    public ResponseEntity<String> signOut() {
         try {
             userService.signOut();
+            return new ResponseEntity<>("Successfully logged-out", HttpStatus.OK);
+
         }
         catch (final ServletException ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
@@ -78,11 +85,13 @@ public class UserController {
     /**
      * Deletes a Retro user
      * @param username The Retro user's username
+     * @return ResponseEntity with a success message or an error message as a String
      */
     @DeleteMapping(value = "delete/{username}")
-    public void delete(@PathVariable String username) {
+    public ResponseEntity<String> delete(@PathVariable String username) {
         if (!userService.delete(username))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
+        return new ResponseEntity<>("Account successfully deleted", HttpStatus.OK);
     }
 
     /**
@@ -94,7 +103,7 @@ public class UserController {
     public ResponseEntity<String> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest) {
         try {
             return userService.changePassword(passwordChangeRequest.oldPassword(), passwordChangeRequest.newPassword())
-                    ? new ResponseEntity<>("Password changed successfully", HttpStatus.OK)
+                    ? new ResponseEntity<>("Password successfully changed", HttpStatus.OK)
                     : new ResponseEntity<>("Password change failed", HttpStatus.UNAUTHORIZED);
         } catch (final Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
