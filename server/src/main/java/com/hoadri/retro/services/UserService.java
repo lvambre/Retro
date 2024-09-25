@@ -2,6 +2,7 @@ package com.hoadri.retro.services;
 
 import com.hoadri.retro.dtos.UserPublicDTO;
 import com.hoadri.retro.managers.RetroUserDetails;
+import com.hoadri.retro.managers.RetroUserDetailsManager;
 import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.repositories.RetroUserRepository;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +75,15 @@ public class UserService {
             return false;
         userDetailsManager.deleteUser(username);
         return true;
+    }
+
+    public boolean changePassword(String oldPassword, String newPassword) {
+        try {
+            userDetailsManager.changePassword(oldPassword, newPassword);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
     }
 
     public List<UserPublicDTO> fetchAllUsers() {

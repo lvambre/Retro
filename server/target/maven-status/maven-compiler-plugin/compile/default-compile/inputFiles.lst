@@ -1,5 +1,6 @@
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\controllers\ItemController.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\controllers\UserController.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\dtos\PasswordChangeRequest.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\dtos\UserCredentialsDTO.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\dtos\UserLogInDTO.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\dtos\UserPublicDTO.java
@@ -17,6 +18,7 @@ C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\mo
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\repositories\ItemRepository.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\repositories\RetroUserRepository.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\RetroApplication.java
+C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\security\Handler403Error.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\security\SecurityConfiguration.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\services\ItemService.java
 C:\Users\levei\Documents\projects\Retro\server\src\main\java\com\hoadri\retro\services\UserService.java

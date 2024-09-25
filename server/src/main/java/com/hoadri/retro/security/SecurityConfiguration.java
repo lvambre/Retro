@@ -22,8 +22,10 @@ public class SecurityConfiguration {
                                 .requestMatchers("/user/signIn").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .exceptionHandling(exception ->
+                        exception
+                                .authenticationEntryPoint(new Handler403Error()))
                 .csrf(AbstractHttpConfigurer::disable);
-
         return http.build();
     }
 

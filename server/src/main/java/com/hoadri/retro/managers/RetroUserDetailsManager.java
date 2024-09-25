@@ -2,18 +2,27 @@ package com.hoadri.retro.managers;
 
 import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.repositories.RetroUserRepository;
+import com.hoadri.retro.security.SecurityConfiguration;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.AccessDeniedException;
+
 @Component
 public class RetroUserDetailsManager implements UserDetailsManager {
     private final RetroUserRepository retroUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public RetroUserDetailsManager(RetroUserRepository retroUserRepository, PasswordEncoder passwordEncoder) {
         this.retroUserRepository = retroUserRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -50,7 +59,22 @@ public class RetroUserDetailsManager implements UserDetailsManager {
 
     @Override
     public void changePassword(String oldPassword, String newPassword) {
+        Authentication currentLoggedInUser = SecurityContextHolder.getContext().getAuthentication();
 
+        if (currentLoggedInUser == null) {
+            throw new IllegalStateException("No authenticated user found.");
+        }
+
+        String username = currentLoggedInUser.getName();
+        RetroUser retroUser = retroUserRepository.findByUsername(username);
+
+        if (!passwordEncoder.matches(oldPassword, retroUser.getPassword())) {
+            throw new IllegalArgumentException("Wrong old password.");
+        }
+
+        retroUser.setPassword(passwordEncoder.encode(newPassword));
+
+        retroUserRepository.save(retroUser);
     }
 
     @Override

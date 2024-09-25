@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33ab96cd-e0ef-4047-a512-225cc1c7da3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/controllers/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/controllers/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/models/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/models/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/services/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/hoadri/retro/services/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/RetroApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/RetroApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/controllers/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/controllers/ItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/models/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/models/Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/models/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/models/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/services/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/classes/com/hoadri/retro/services/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/retro-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/retro-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/retro-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/retro-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/surefire-reports/TEST-com.hoadri.retro.RetroApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/surefire-reports/TEST-com.hoadri.retro.RetroApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/surefire-reports/com.hoadri.retro.RetroApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/surefire-reports/com.hoadri.retro.RetroApplicationTests.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +42,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "devHoa",
     "ignore_missing_gitignore": "true",
-    "last_opened_file_path": "C:/Users/levei/Documents/projects/Retro/server",
+    "last_opened_file_path": "C:/Users/levei/Documents/projects/Retro",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,7 +71,8 @@
       <updated>1727210896101</updated>
       <workItem from="1727210901521" duration="388000" />
       <workItem from="1727211311017" duration="612000" />
-      <workItem from="1727211942322" duration="667000" />
+      <workItem from="1727211942322" duration="674000" />
+      <workItem from="1727213936258" duration="41000" />
     </task>
     <servers />
   </component>

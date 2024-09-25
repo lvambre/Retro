@@ -1,5 +1,6 @@
 package com.hoadri.retro.controllers;
 
+import com.hoadri.retro.dtos.PasswordChangeRequest;
 import com.hoadri.retro.dtos.UserCredentialsDTO;
 import com.hoadri.retro.dtos.UserLogInDTO;
 import com.hoadri.retro.dtos.UserPublicDTO;
@@ -13,8 +14,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 
+/**
+ * A Rest controller for managing user authentication related endpoints
+ * Provides REST API methods for operations on (Retro) Users
+ * Handles HTTP requests related to users and interacts with the UserService to perform necessary operations on the users
+ */
 @RestController
 @RequestMapping("user")
 @RequiredArgsConstructor
@@ -77,6 +84,22 @@ public class UserController {
     public void delete(@PathVariable String username) {
         if (!userService.delete(username))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
+    }
+
+    /**
+     * Allows the logged-in user to change their password
+     * @param passwordChangeRequest An entity with both old and new password
+     * @return ResponseEntity with a success message or an error message as a String
+     */
+    @PostMapping(value = "changePassword", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest) {
+        try {
+            return userService.changePassword(passwordChangeRequest.oldPassword(), passwordChangeRequest.newPassword())
+                    ? new ResponseEntity<>("Password changed successfully", HttpStatus.OK)
+                    : new ResponseEntity<>("Password change failed", HttpStatus.UNAUTHORIZED);
+        } catch (final Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
     }
 
     /**
