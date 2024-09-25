@@ -1,6 +1,16 @@
 import retro from '../assets/retro.png'
+import React, { useState } from 'react';
 
 function NavBar(){
+
+    // Simule l'état de connexion de l'utilisateur
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // Fonction pour simuler la connexion et la déconnexion
+    const toggleLogin = () => {
+        setIsLoggedIn(!isLoggedIn);
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-lg border-bottom">
@@ -34,10 +44,15 @@ function NavBar(){
                                     Account
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="/settings">Settings</a></li>
+                                    <li><a className="dropdown-item" href="/settings/profile">Settings</a></li>
                                     <li><a className="dropdown-item" href="/sells">Sells</a></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="#">Sign in/Sign up</a></li>
+                                    {isLoggedIn ? (
+                                        <li><a className="dropdown-item" href="#" onClick={toggleLogin}>Logout</a></li>
+                                    ) : (
+                                        <li><a className="dropdown-item" href="#" onClick={toggleLogin}>Sign in/Sign
+                                            up</a></li>
+                                    )}
                                 </ul>
                             </li>
                         </div>
