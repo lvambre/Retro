@@ -1,8 +1,23 @@
+// Import Bootstraps' functions and variables before using or editing $theme-colors
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+
 // Custom Bootstrap variables
-$body-bg: #FFF7E7; // Custom body background color
-$body-color: #333; // Custom body text color
-$primary: #8CB18F; // Change primary button color
-$secondary: #9363A3; // Change secondary button color
+$retro-white: #FFF7E7;
+$body-bg: $retro-white; // Custom body background color
+
+// Create your own map
+$custom-colors: (
+        "retro-green": #8CB18F,
+        "retro-blue": #94C7EE,
+        "retro-yellow": #FFE09F,
+        "retro-white": $retro-white,
+        "retro-pink": #F183B3,
+        "retro-purple": #9363A3
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
 // Import Bootstrap after overriding the variables
 @import '../node_modules/bootstrap/scss/bootstrap';
