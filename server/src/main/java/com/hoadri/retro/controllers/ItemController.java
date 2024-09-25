@@ -27,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("item")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class ItemController {
 
     @Autowired
