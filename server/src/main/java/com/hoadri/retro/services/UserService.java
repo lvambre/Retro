@@ -2,7 +2,6 @@ package com.hoadri.retro.services;
 
 import com.hoadri.retro.dtos.UserPublicDTO;
 import com.hoadri.retro.managers.RetroUserDetails;
-import com.hoadri.retro.managers.RetroUserDetailsManager;
 import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.repositories.RetroUserRepository;
 import jakarta.servlet.ServletException;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +48,6 @@ public class UserService {
         retroUser.setProfilePicturePath(profilePicturePath);
         retroUser.setDescription(description);
         retroUser.setItemsOrdered(new ArrayList<>());
-        retroUser.setItemsSold(new ArrayList<>());
         final UserDetails user = new RetroUserDetails(retroUser);
         userDetailsManager.createUser(user);
         return true;

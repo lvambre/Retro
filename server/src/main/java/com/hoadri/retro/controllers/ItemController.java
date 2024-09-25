@@ -1,5 +1,6 @@
 package com.hoadri.retro.controllers;
 
+import com.hoadri.retro.dtos.ItemDTO;
 import com.hoadri.retro.models.Item;
 import com.hoadri.retro.models.enums.Category;
 import com.hoadri.retro.services.ItemService;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +26,7 @@ import java.util.UUID;
  * Handles HTTP requests related to items and interacts with the ItemService to perform necessary operations on the data
  */
 @RestController
-@RequestMapping("/item")
+@RequestMapping("item")
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -34,10 +36,10 @@ public class ItemController {
     /**
      * Retrieves all items on Retro
      *
-     * @return A list of all the Item
+     * @return A list of all the ItemDTOs
      */
     @GetMapping(value = "items", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Item>> getItems() {
+    public ResponseEntity<List<ItemDTO>> getItems() {
         try {
             return new ResponseEntity<>(itemService.fetchAllItems(), HttpStatus.OK);
         } catch (final Exception ex) {
@@ -48,10 +50,10 @@ public class ItemController {
     /**
      * Retrieves all items for sale on Retro
      *
-     * @return A list of all the Item for sale
+     * @return A list of all the ItemDTOs for sale
      */
     @GetMapping(value = "itemsForSale", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Item>> getItemsInSale() {
+    public ResponseEntity<List<ItemDTO>> getItemsInSale() {
         try {
             return new ResponseEntity<>(itemService.fetchItemsInSale(), HttpStatus.OK);
         } catch (final Exception ex) {
@@ -62,10 +64,10 @@ public class ItemController {
     /**
      * Retrieves all items corresponding to a given category
      * @param categoryString The Item's category
-     * @return A list of Item of the given category
+     * @return A list of ItemDTOs of the given category
      */
     @GetMapping(value = "sortBy/{categoryString}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Item>> getItemsByCategory(@PathVariable String categoryString) {
+    public ResponseEntity<List<ItemDTO>> getItemsByCategory(@PathVariable String categoryString) {
         try {
            Category category = Category.valueOf(categoryString.toUpperCase());
             return new ResponseEntity<>(itemService.fetchItemsByCategory(category), HttpStatus.OK);
@@ -82,11 +84,11 @@ public class ItemController {
      * @return The Item found
      */
     @GetMapping(value = "get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Item> getItem(@PathVariable UUID id) {
+    public ResponseEntity<ItemDTO> getItem(@PathVariable UUID id) {
         try {
-            Item item = itemService.fetchOneItem(id);
-            return item != null
-                    ? new ResponseEntity<>(item, HttpStatus.OK)
+            ItemDTO itemDTO = itemService.fetchOneItem(id);
+            return itemDTO != null
+                    ? new ResponseEntity<>(itemDTO, HttpStatus.OK)
                     : new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (final Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
@@ -96,12 +98,15 @@ public class ItemController {
     /**
      * Adds a new item for sale on Retro
      *
-     * @return The Item put for sale
+     * @param itemDTO The new ItemDTO to put for sale
+     * @return ResponseEntity with a success message or an error message as a String
      */
     @PostMapping(value = "newItem", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Item> newItem(@RequestBody Item item) {
+    public ResponseEntity<String> newItem(@RequestBody ItemDTO itemDTO, Principal user) {
         try {
-            return new ResponseEntity<>(itemService.newItem(item), HttpStatus.OK);
+            return itemService.newItem(itemDTO, user.getName())
+                    ? new ResponseEntity<>("New item successfully created", HttpStatus.OK)
+                    : new ResponseEntity<>("Error while creating new item", HttpStatus.BAD_REQUEST);
         } catch (final Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
         }
@@ -185,8 +190,8 @@ public class ItemController {
                 return new ResponseEntity<>("Maximum 5 images allowed", HttpStatus.BAD_REQUEST);
             }
 
-            Item item = itemService.fetchOneItem(id);
-            if(item == null) {
+            ItemDTO itemDTO = itemService.fetchOneItem(id);
+            if(itemDTO == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 

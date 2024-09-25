@@ -46,8 +46,6 @@ public class RetroUserDetails implements UserDetails {
 
     public List<Item> getItemsOrdered() { return retroUser.getItemsOrdered(); }
 
-    public List<Item> getItemsSold() { return retroUser.getItemsSold(); }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

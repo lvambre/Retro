@@ -2,9 +2,6 @@ package com.hoadri.retro.managers;
 
 import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.repositories.RetroUserRepository;
-import com.hoadri.retro.security.SecurityConfiguration;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
-
-import java.nio.file.AccessDeniedException;
 
 @Component
 public class RetroUserDetailsManager implements UserDetailsManager {
@@ -37,7 +32,6 @@ public class RetroUserDetailsManager implements UserDetailsManager {
             retroUser.setProfilePicturePath(retroUserDetails.getProfilePicturePath());
             retroUser.setDescription(retroUserDetails.getDescription());
             retroUser.setItemsOrdered(retroUserDetails.getItemsOrdered());
-            retroUser.setItemsSold(retroUserDetails.getItemsSold());
             retroUserRepository.save(retroUser);
         } else {
             throw new IllegalArgumentException("UserDetails must be an instance of RetroUserDetails");

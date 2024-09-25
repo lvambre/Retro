@@ -1,9 +1,11 @@
 package com.hoadri.retro.services;
 
+import com.hoadri.retro.dtos.ItemDTO;
 import com.hoadri.retro.models.Item;
 import com.hoadri.retro.models.RetroUser;
 import com.hoadri.retro.models.enums.*;
 import com.hoadri.retro.repositories.ItemRepository;
+import com.hoadri.retro.repositories.RetroUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * A service for managing items related logic
@@ -23,21 +26,57 @@ import java.util.UUID;
 public class ItemService {
     @Autowired
     private final ItemRepository itemRepository;
+    @Autowired
+    private final RetroUserRepository retroUserRepository;
 
     /**
      * Retrieves all items on Retro
-     * @return A list of all Items on Retro
+     * @return A list of all ItemDTOs on Retro
      */
-    public List<Item> fetchAllItems() {
-        return itemRepository.findAll();
+    public List<ItemDTO> fetchAllItems() {
+        return itemRepository.findAll().stream().map(
+                item ->
+                        new ItemDTO(
+                                item.getId(),
+                                item.getName(),
+                                item.getDescription(),
+                                item.getSeller().getUsername(),
+                                item.getPrice(),
+                                item.isAvailable(),
+                                item.isWomen(),
+                                item.isMen(),
+                                item.getBrand(),
+                                item.getCategory(),
+                                item.getColors(),
+                                item.getCondition(),
+                                item.getSize(),
+                                item.getImagePaths()
+                        )).collect(Collectors.toList());
     }
 
     /**
      * Retrieves all items for sale on Retro
-     * @return A list of Item for sale on Retro
+     * @return A list of ItemDTOs for sale on Retro
      */
-    public List<Item> fetchItemsInSale() {
-        return itemRepository.findByAvailable(true);
+    public List<ItemDTO> fetchItemsInSale() {
+        return itemRepository.findByAvailable(true).stream().map(
+                item ->
+                        new ItemDTO(
+                                item.getId(),
+                                item.getName(),
+                                item.getDescription(),
+                                item.getSeller().getUsername(),
+                                item.getPrice(),
+                                item.isAvailable(),
+                                item.isWomen(),
+                                item.isMen(),
+                                item.getBrand(),
+                                item.getCategory(),
+                                item.getColors(),
+                                item.getCondition(),
+                                item.getSize(),
+                                item.getImagePaths()
+                        )).collect(Collectors.toList());
     }
 
     /**
@@ -45,8 +84,25 @@ public class ItemService {
      * @param category The Item's category
      * @return A list of Item of the given category
      */
-    public List<Item> fetchItemsByCategory(Category category) {
-        return itemRepository.findByCategory(category);
+    public List<ItemDTO> fetchItemsByCategory(Category category) {
+        return itemRepository.findByCategory(category).stream().map(
+                item ->
+                        new ItemDTO(
+                                item.getId(),
+                                item.getName(),
+                                item.getDescription(),
+                                item.getSeller().getUsername(),
+                                item.getPrice(),
+                                item.isAvailable(),
+                                item.isWomen(),
+                                item.isMen(),
+                                item.getBrand(),
+                                item.getCategory(),
+                                item.getColors(),
+                                item.getCondition(),
+                                item.getSize(),
+                                item.getImagePaths()
+                        )).collect(Collectors.toList());
     }
 
     /**
@@ -54,18 +110,49 @@ public class ItemService {
      * @param id The Item's id to retrieve
      * @return The Item found
      */
-    public Item fetchOneItem(UUID id) {
-        Optional<Item> item = itemRepository.findById(id);
-        return item.orElse(null);
+    public ItemDTO fetchOneItem(UUID id) {
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        return optionalItem.map(item -> new ItemDTO(
+                item.getId(),
+                item.getName(),
+                item.getDescription(),
+                item.getSeller().getUsername(),
+                item.getPrice(),
+                item.isAvailable(),
+                item.isWomen(),
+                item.isMen(),
+                item.getBrand(),
+                item.getCategory(),
+                item.getColors(),
+                item.getCondition(),
+                item.getSize(),
+                item.getImagePaths()
+        )).orElse(null);
     }
 
     /**
      * Adds a new item to sell on Retro
      * @return The Item put on sale
      */
-    public Item newItem(Item item) {
+    public boolean newItem(ItemDTO itemDTO, String username) {
+        RetroUser retroUser = retroUserRepository.findByUsername(username);
+        if(retroUser == null) return false;
+        Item item = new Item(
+                itemDTO.name(),
+                itemDTO.description(),
+                retroUser,
+                itemDTO.price(),
+                true,
+                itemDTO.women(),
+                itemDTO.men(),
+                itemDTO.brand(),
+                itemDTO.category(),
+                itemDTO.colors(),
+                itemDTO.condition(),
+                itemDTO.size(),
+                itemDTO.imagePaths());
         itemRepository.save(item);
-        return item;
+        return true;
     }
 
     /**
@@ -81,12 +168,20 @@ public class ItemService {
     }
 
     /**
-     *  Updates an item in sale
+     * Updates an item in sale
      * @param id Item's attribute
      * @param name Item's attribute
      * @param description Item's attribute
      * @param seller Item's attribute
      * @param price Item's attribute
+     * @param available Item's attribute
+     * @param women Item's attribute
+     * @param men Item's attribute
+     * @param brand Item's attribute
+     * @param category Item's attribute
+     * @param condition Item's attribute
+     * @param colors Item's attribute
+     * @param size Item's attribute
      * @param imagePaths Item's attribute
      * @return True if update was successful
      */

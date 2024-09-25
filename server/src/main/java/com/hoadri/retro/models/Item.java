@@ -4,7 +4,6 @@ import com.hoadri.retro.models.enums.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +24,8 @@ public class Item {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller", referencedColumnName = "user", nullable = false)
     private RetroUser seller;
 
     @Column(name = "price", nullable = false)
@@ -63,30 +63,22 @@ public class Item {
     private Size size;
 
     @ElementCollection
-    private List<String> imagePaths = new ArrayList<>();
+    private List<String> imagePaths;
 
-    public Item() {
-    }
-
-    /**
-     * Copy constructor
-     */
-    public Item(UUID id,
-                String name,
-                String description,
-                RetroUser seller,
-                double price,
-                boolean available,
-                boolean women,
-                boolean men,
-                Brand brand,
-                Category category,
-                Condition condition,
-                List<Color> colors,
-                Size size,
-                List<String> imagePaths
-    ) {
-        this.id = id;
+    public Item(
+            String name,
+            String description,
+            RetroUser seller,
+            double price,
+            boolean available,
+            boolean women,
+            boolean men,
+            Brand brand,
+            Category category,
+            List<Color> colors,
+            Condition condition,
+            Size size,
+            List<String> imagePaths) {
         this.name = name;
         this.description = description;
         this.seller = seller;
@@ -100,5 +92,8 @@ public class Item {
         this.colors = colors;
         this.size = size;
         this.imagePaths = imagePaths;
+    }
+
+    public Item() {
     }
 }
