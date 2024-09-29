@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a6cee85-1a4c-4b8a-ac16-cbdd8b894749" name="Changes" comment="Front v1">
-      <change afterPath="$PROJECT_DIR$/client/client-retro/src/pages/SettingsAccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/client-retro/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/components/ListGroup.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/client-retro/src/components/SettingsNavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/components/ListGroup.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/components/NavBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/client-retro/src/pages/SettingsProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/client-retro/src/components/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/components/NavBar2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client-retro/src/pages/Settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/client-retro/src/pages/Settings.tsx" afterDir="false" />
+    <list default="true" id="a8ffbba4-2d7e-443d-9ac8-159cb0335eb4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/openapitools.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,11 +21,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2mYt1hZSA9nVDsZIfjHDZJYwjWV" />
+  <component name="ProjectId" id="2mkUpAviVZ6Kg3esXr1ZBrRPo1F" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,15 +37,20 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "devAdri",
+    "git-widget-placeholder": "milestone1",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\adrie\\IdeaProjects\\Retro\\client\\client-retro\\node_modules\\typescript\\lib",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -64,6 +67,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+        <option value="jdk-20.0.2-azul-20.0.2-4caba194b151-eb49e076" />
         <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
@@ -71,22 +75,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9a6cee85-1a4c-4b8a-ac16-cbdd8b894749" name="Changes" comment="" />
-      <created>1727265126014</created>
+      <changelist id="a8ffbba4-2d7e-443d-9ac8-159cb0335eb4" name="Changes" comment="" />
+      <created>1727620250419</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1727265126014</updated>
-      <workItem from="1727265128826" duration="5006000" />
+      <updated>1727620250419</updated>
+      <workItem from="1727620252779" duration="794000" />
     </task>
-    <task id="LOCAL-00001" summary="Front v1">
-      <option name="closed" value="true" />
-      <created>1727265450787</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1727265450787</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,9 +97,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Front v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front v1" />
   </component>
 </project>
